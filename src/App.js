@@ -3,13 +3,13 @@ import axios from "axios";
 import "./styles.css";
 
 function App() {
-  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
   const [weather, setWeather] = useState(null);
 
   const fetchWeather = async () => {
     try {
       const response = await axios.get(
-        `http://dataservice.accuweather.com/currentconditions/v1/{locationKey}`
+        `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=cc427f69b73eb948792a74187c03fac1&units=metric`,
       );
       setWeather(response.data);
     } catch (error) {
@@ -22,9 +22,9 @@ function App() {
       <h1>Weather App</h1>
       <input
         type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city"
+        value={zip}
+        onChange={(e) => setZip(e.target.value)}
+        placeholder="Enter Zip Code"
       />
       <button onClick={fetchWeather}>Get Weather</button>
       {weather && (
@@ -37,7 +37,7 @@ function App() {
       )}
       <footer>
         <a
-          href="https://github.com/yourusername/weather-app"
+          href="https://github.com/jamesmc97/WeatherApp"
           target="_blank"
           rel="noopener noreferrer"
         >
